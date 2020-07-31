@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+        document.title = 'LU Project | Random Quotes Generator'
+    function findQuote(){
+        fetch("https://type.fit/api/quotes", {
+                method: "GET",
+    }).then(response => {return response.json()}).then(response=>{
+        // console.log(response);
+        let max = response.length;
+        let min = 0;
+        let k = Math.floor(Math.random()*(max-min))
+        console.log(response[k]);
+        document.getElementById('quotes').innerHTML = `
+        <b>${response[k].text}</b>
+        `
+        document.getElementById('author').innerHTML = `
+        -<i><b>${response[k].author}<b></i>
+        `
+    })
+    }
+    </script>
+    <h1 id='quotes' class = 'elegantshadow'>Click The Button For Your Random Qoute</h1>
+    <p id='author'>Try it!!</p>
+    <Button class='button button2' onclick='findQuote()'>Random Quotes!!</Button>
+</body>
+</html>
